@@ -3,6 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { UserContext } from '../../contexts/user'
+import Error from './components/error'
 
 const Auth = props => {
   const isLogin = props.match.path === '/login'
@@ -16,7 +17,7 @@ const Auth = props => {
   const [isSubmit, setIsSubmit] = useState(false)
 
   const apiUrl = isLogin ? '/users/login' : '/users'
-  const [{ loading, data }, doFetch] = useFetch(apiUrl)
+  const [{ loading, data, error }, doFetch] = useFetch(apiUrl)
   const [, setToken] = useLocalStorage('token')
   const [, setUser] = useContext(UserContext)
 
@@ -57,6 +58,8 @@ const Auth = props => {
                 <Link to={link}>{linkText}</Link>
               </p>
               <form onSubmit={handleSubmit}>
+                {error && <Error text={error.errors} />}
+
                 <fieldset>
                   {!isLogin && (
                     <fieldset className="form-group">
