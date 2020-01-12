@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 const Auth = props => {
   const isLogin = props.match.path === '/login'
@@ -14,7 +15,10 @@ const Auth = props => {
   const [isSubmit, setIsSubmit] = useState(false)
 
   const apiUrl = isLogin ? '/users/login' : '/users'
-  const [{ loading, data, error }, doFetch] = useFetch(apiUrl)
+  const [{ loading, data }, doFetch] = useFetch(apiUrl)
+  const [token, setToken] = useLocalStorage('token')
+
+  console.log('token', token)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -29,9 +33,9 @@ const Auth = props => {
   useEffect(() => {
     if (!data) return
 
-    localStorage.setItem('token', data.user.token)
+    setToken(data.user.token)
     setIsSubmit(true)
-  }, [data])
+  }, [data, setToken])
 
   if (isSubmit) return <Redirect to="/" />
 
