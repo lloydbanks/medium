@@ -23,7 +23,7 @@ const UserChecker = ({ children }) => {
       ...state,
       loading: true
     }))
-  }, [token, setUser])
+  }, [token, setUser, doFetch])
 
   useEffect(() => {
     if (!data) return
