@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link, NavLink } from 'react-router-dom'
+import { UserContext } from '../../contexts/user'
 
 const Topbar = () => {
+  const [userState] = useContext(UserContext)
+  const { user } = userState
+
   return (
     <nav className="navbar navbar-light">
       <div className="container">
@@ -14,16 +18,38 @@ const Topbar = () => {
               Home
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink to="/login" className="nav-link">
-              Sign in
-            </NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink to="/register" className="nav-link">
-              Sign up
-            </NavLink>
-          </li>
+          {!userState.logged && (
+            <>
+              <li className="nav-item">
+                <NavLink to="/login" className="nav-link">
+                  Sign in
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to="/register" className="nav-link">
+                  Sign up
+                </NavLink>
+              </li>
+            </>
+          )}
+          {userState.logged && (
+            <>
+              <li className="nav-item">
+                <NavLink to="/articles/news" className="nav-link">
+                  <i className="ion-compose"></i>
+                  &nbsp; New post
+                </NavLink>
+              </li>
+              <li className="nav-item">
+                <NavLink to={`/profiles/${user.username}`} className="nav-link">
+                  {user.image && (
+                    <img src={user.image} alt="" className="user-pic" />
+                  )}
+                  {user.username}
+                </NavLink>
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>
