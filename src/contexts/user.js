@@ -4,7 +4,7 @@ export const UserContext = createContext([{}, () => {}])
 export const UserProvider = ({ children }) => {
   const [user, setUser] = useState({
     loading: false,
-    logged: false,
+    logged: null,
     user: null
   })
 

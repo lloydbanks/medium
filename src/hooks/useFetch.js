@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import useLocalStorage from './useLocalStorage'
 
 export default url => {
   const BASE_URL = 'https://conduit.productionready.io/api'
@@ -8,9 +9,18 @@ export default url => {
   const [data, setData] = useState(null)
   const [error, setError] = useState(null)
   const [params, setParams] = useState({})
+  const [token] = useLocalStorage('token')
 
   const doFetch = (params = {}) => {
-    setParams(params)
+    const options = {
+      ...params,
+      ...{
+        headers: {
+          authorization: token ? `Token ${token}` : ''
+        }
+      }
+    }
+    setParams(options)
     setLoading(true)
   }
 
