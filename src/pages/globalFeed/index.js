@@ -5,6 +5,8 @@ import Pagination from '../../components/pagination'
 import { getPaginator } from '../../helpers'
 import { stringify } from 'query-string'
 import { LIMIT } from '../../helpers'
+import Tags from '../../components/tags'
+import { Loading, Error } from '../../components/status'
 
 const GlobalFeed = ({ location, match }) => {
   const { offset, current } = getPaginator(location.search)
@@ -28,8 +30,8 @@ const GlobalFeed = ({ location, match }) => {
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
-            {loading && <p>Loading...</p>}
-            {error && <p>An error occurred...</p>}
+            {loading && <Loading />}
+            {error && <Error />}
             {!loading && data && (
               <>
                 <Feed articles={data.articles} />
@@ -43,7 +45,7 @@ const GlobalFeed = ({ location, match }) => {
             )}
           </div>
           <div className="col-md-3">
-            <h3>Popular tags</h3>
+            <Tags />
           </div>
         </div>
       </div>
