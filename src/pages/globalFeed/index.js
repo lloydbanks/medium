@@ -4,11 +4,12 @@ import Feed from '../../components/feed'
 import Pagination from '../../components/pagination'
 import { getPaginator } from '../../helpers'
 import { stringify } from 'query-string'
+import { LIMIT } from '../../helpers'
 
 const GlobalFeed = ({ location, match }) => {
-  const { offset, current, limit } = getPaginator(location.search)
+  const { offset, current } = getPaginator(location.search)
   const { url } = match
-  const params = stringify({ limit, offset })
+  const params = stringify({ limit: LIMIT, offset })
   const apiUrl = `/articles?${params}`
   const [{ loading, data, error }, doFetch] = useFetch(apiUrl)
 
@@ -34,7 +35,7 @@ const GlobalFeed = ({ location, match }) => {
                 <Feed articles={data.articles} />
                 <Pagination
                   total={data.articlesCount}
-                  limit={10}
+                  limit={LIMIT}
                   current={current}
                   url={url}
                 />

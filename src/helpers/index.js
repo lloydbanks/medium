@@ -6,10 +6,10 @@ export const range = (start, end) => {
   return [...Array(end).keys()].map(n => n + start)
 }
 
-export const getPaginator = search => {
+export const getPaginator = (search, limit = LIMIT) => {
   const parsedSearch = parse(search)
   const current = parsedSearch.page ? +parsedSearch.page : 1
-  const offset = current * LIMIT - LIMIT
+  const offset = current * limit - limit
 
-  return { current, offset, limit: LIMIT }
+  return { current, offset }
 }
