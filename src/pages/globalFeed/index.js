@@ -7,6 +7,7 @@ import { stringify } from 'query-string'
 import { LIMIT } from '../../helpers'
 import Tags from '../../components/tags'
 import { Loading, Error } from '../../components/status'
+import FeedToggler from '../../components/feed/toggler'
 
 const GlobalFeed = ({ location, match }) => {
   const { offset, current } = getPaginator(location.search)
@@ -30,6 +31,8 @@ const GlobalFeed = ({ location, match }) => {
       <div className="container page">
         <div className="row">
           <div className="col-md-9">
+            <FeedToggler />
+
             {loading && <Loading />}
             {error && <Error />}
             {!loading && data && (
