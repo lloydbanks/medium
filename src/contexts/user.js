@@ -1,16 +1,26 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useReducer } from 'react'
 
-export const UserContext = createContext([{}, () => {}])
+const initialState = {
+  loading: false,
+  logged: null,
+  user: null
+}
+
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'LOADING':
+      return { ...state, loading: true }
+    case 'LOGIN':
+      return { ...state, logged: true, loading: false, user: action.payload }
+    case 'LOGOUT':
+      return { ...state, logged: false }
+    default:
+      return state
+  }
+}
+
+export const UserContext = createContext()
 export const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({
-    loading: false,
-    logged: null,
-    user: null
-  })
-
-  return (
-    <UserContext.Provider value={[user, setUser]}>
-      {children}
-    </UserContext.Provider>
-  )
+  const value = useReducer(reducer, initialState)
+  return <UserContext.Provider value={value}>{children}</UserContext.Provider>
 }

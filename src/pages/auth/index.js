@@ -19,7 +19,7 @@ const Auth = props => {
   const apiUrl = isLogin ? '/users/login' : '/users'
   const [{ loading, data, error }, doFetch] = useFetch(apiUrl)
   const [, setToken] = useLocalStorage('token')
-  const [, setUser] = useContext(UserContext)
+  const [, dispatch] = useContext(UserContext)
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -35,15 +35,11 @@ const Auth = props => {
     if (!data) return
 
     const { user } = data
-    setUser(state => ({
-      ...state,
-      loading: false,
-      logged: true,
-      user
-    }))
+    dispatch({ type: 'LOGIN', payload: user })
+
     setToken(user.token)
     setIsSubmit(true)
-  }, [data, setToken, setUser])
+  }, [data, setToken, dispatch])
 
   if (isSubmit) return <Redirect to="/" />
 

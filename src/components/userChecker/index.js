@@ -5,36 +5,24 @@ import { UserContext } from '../../contexts/user'
 
 const UserChecker = ({ children }) => {
   const [{ data }, doFetch] = useFetch('/user')
-  const [, setUser] = useContext(UserContext)
+  const [, dispatch] = useContext(UserContext)
   const [token] = useLocalStorage('token')
 
   useEffect(() => {
     if (!token) {
-      setUser(state => ({
-        ...state,
-        logged: false
-      }))
-
+      dispatch({ type: 'LOGOUT' })
       return
     }
 
     doFetch()
-    setUser(state => ({
-      ...state,
-      loading: true
-    }))
-  }, [token, setUser, doFetch])
+    dispatch({ type: 'LOADING' })
+  }, [token, dispatch, doFetch])
 
   useEffect(() => {
     if (!data) return
 
-    setUser(state => ({
-      ...state,
-      user: data.user,
-      logged: true,
-      loading: false
-    }))
-  }, [data, setUser])
+    dispatch({ type: 'LOGIN', payload: data.user })
+  }, [data, dispatch])
 
   return children
 }
