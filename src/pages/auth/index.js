@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import useFetch from '../../hooks/useFetch'
 import useLocalStorage from '../../hooks/useLocalStorage'
 import { UserContext } from '../../contexts/user'
-import Error from './components/error'
+import { Error } from '../../components/status'
 
 const Auth = props => {
   const isLogin = props.match.path === '/login'

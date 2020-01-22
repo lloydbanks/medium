@@ -35,7 +35,7 @@ const Topbar = () => {
           {userState.logged && (
             <>
               <li className="nav-item">
-                <NavLink to="/articles/news" className="nav-link">
+                <NavLink to="/articles/create" className="nav-link">
                   <i className="ion-compose"></i>
                   &nbsp; New post
                 </NavLink>
