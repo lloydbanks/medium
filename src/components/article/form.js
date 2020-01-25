@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { Error } from '../status'
 
 const ArticleForm = ({ onSubmit, errors, initialValues }) => {
-  const [title, setTitle] = useState()
+  const [title, setTitle] = useState('')
   const [body, setBody] = useState('')
   const [description, setDescription] = useState('')
   const [tagList, setTagList] = useState('')
