@@ -6,7 +6,7 @@ import { UserContext } from '../../contexts/user'
 
 const CreateArticle = () => {
   const apiUrl = '/articles'
-  const [{ response, error }, doFetch] = useFetch(apiUrl)
+  const [{ data, error }, doFetch] = useFetch(apiUrl)
   const [user] = useContext(UserContext)
   const initialValues = {
     title: '',
@@ -25,15 +25,15 @@ const CreateArticle = () => {
   }
 
   useEffect(() => {
-    if (!response) return
+    if (!data) return
 
     setSuccess(true)
-  }, [response])
+  }, [data])
 
   if (user.logged === false) return <Redirect to="/" />
 
   if (success) {
-    return <Redirect to={`/articles/${response.article.slug}`} />
+    return <Redirect to={`/articles/${data.article.slug}`} />
   }
 
   return (
