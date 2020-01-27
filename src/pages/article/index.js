@@ -1,13 +1,25 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useContext } from 'react'
 import useFetch from '../../hooks/useFetch'
 import { Loading, Error } from '../../components/status'
 import { Link } from 'react-router-dom'
 import TagList from '../../components/tags/list'
+import { UserContext } from '../../contexts/user'
 
 const Article = ({ match }) => {
   const { slug } = match.params
   const apiUrl = `/articles/${slug}`
   const [{ loading, data, error }, doFetch] = useFetch(apiUrl)
+  const [user] = useContext(UserContext)
+
+  const isAuthor = () => {
+    if (!data || !user.logged) return
+
+    return data.article.author.username === user.user.username
+  }
+
+  const deleteArticle = () => {
+    console.log('delete Article')
+  }
 
   useEffect(() => {
     doFetch()
@@ -29,6 +41,22 @@ const Article = ({ match }) => {
                 </Link>
                 <span className="date">{data.article.createdAt}</span>
               </div>
+              {isAuthor() && (
+                <span>
+                  <Link
+                    className="btn btn-outline-secondary btn-sm"
+                    to={`/articles/${data.article.slug}/edit`}
+                  >
+                    <i className="ion-edit"></i> Edit Article
+                  </Link>
+                  <button
+                    className="btn btn-outline-danger btn-sm"
+                    onClick={deleteArticle}
+                  >
+                    <i className="ion-trash-a"></i> Delete article
+                  </button>
+                </span>
+              )}
             </div>
           </div>
         )}
