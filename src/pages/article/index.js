@@ -1,7 +1,7 @@
-import React, { useEffect, useContext } from 'react'
+import React, { useEffect, useContext, useState } from 'react'
 import useFetch from '../../hooks/useFetch'
 import { Loading, Error } from '../../components/status'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import TagList from '../../components/tags/list'
 import { UserContext } from '../../contexts/user'
 
@@ -9,7 +9,9 @@ const Article = ({ match }) => {
   const { slug } = match.params
   const apiUrl = `/articles/${slug}`
   const [{ loading, data, error }, doFetch] = useFetch(apiUrl)
+  const [{ data: deleteArticleData }, fetchDeleteArticle] = useFetch(apiUrl)
   const [user] = useContext(UserContext)
+  const [success, setSuccess] = useState(false)
 
   const isAuthor = () => {
     if (!data || !user.logged) return
@@ -18,12 +20,20 @@ const Article = ({ match }) => {
   }
 
   const deleteArticle = () => {
-    console.log('delete Article')
+    fetchDeleteArticle({ method: 'delete' })
   }
 
   useEffect(() => {
     doFetch()
   }, [doFetch])
+
+  useEffect(() => {
+    if (!deleteArticleData) return
+
+    setSuccess(true)
+  }, [deleteArticleData])
+
+  if (success) return <Redirect to="/" />
 
   return (
     <div className="article-page">
