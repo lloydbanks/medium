@@ -41,6 +41,12 @@ const Topbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
+                <NavLink to="/settings" className="nav-link">
+                  <i className="ion-gear-a"></i>
+                  &nbsp; Settings
+                </NavLink>
+              </li>
+              <li className="nav-item">
                 <NavLink to={`/profiles/${user.username}`} className="nav-link">
                   {user.image && (
                     <img src={user.image} alt="" className="user-pic" />
