@@ -8,11 +8,14 @@ import CreateArticle from './pages/article/create'
 import EditArticle from './pages/article/edit'
 import Auth from './pages/auth'
 import Settings from './pages/settings'
+import Profile from "./pages/profile";
 
 export default () => {
   return (
     <Switch>
       <Route path="/" component={GlobalFeed} exact />
+      <Route path="/profile/:slug" component={Profile} />
+      <Route path="/profile/:slug/favorites" component={Profile} />
       <Route path="/settings" component={Settings} />
       <Route path="/articles/create" component={CreateArticle} />
       <Route path="/articles/:slug/edit" component={EditArticle} />
