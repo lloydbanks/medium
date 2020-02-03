@@ -45,11 +45,11 @@ const Settings = () => {
     if (!userState.user) return
 
     const { user } = userState
-    setImage(user.image)
+    if (user.image !== null) setImage(user.image)
     setUsername(user.username)
-    setBio(user.bio)
+    if(user.bio !== null) setBio(user.bio)
     setEmail(user.email)
-  }, [userState.user])
+  }, [userState])
 
   useEffect(() => {
     if (!data) return
