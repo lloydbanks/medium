@@ -42,11 +42,11 @@ const Article = ({ match }) => {
           <div className="container">
             <h1>{data.article.title}</h1>
             <div className="article-meta">
-              <Link to={`/profiles/${data.article.author.username}`}>
+              <Link to={`/profile/${data.article.author.username}`}>
                 <img src={data.article.author.image} alt="" />
               </Link>
               <div className="info">
-                <Link to={`/profiles/${data.article.author.username}`}>
+                <Link to={`/profile/${data.article.author.username}`}>
                   {data.article.author.username}
                 </Link>
                 <span className="date">{data.article.createdAt}</span>

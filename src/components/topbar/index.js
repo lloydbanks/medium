@@ -47,7 +47,7 @@ const Topbar = () => {
                 </NavLink>
               </li>
               <li className="nav-item">
-                <NavLink to={`/profiles/${user.username}`} className="nav-link">
+                <NavLink to={`/profile/${user.username}`} className="nav-link">
                   {user.image && (
                     <img src={user.image} alt="" className="user-pic" />
                   )}
