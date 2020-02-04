@@ -47,7 +47,7 @@ const Settings = () => {
     const { user } = userState
     if (user.image !== null) setImage(user.image)
     setUsername(user.username)
-    if(user.bio !== null) setBio(user.bio)
+    if (user.bio !== null) setBio(user.bio)
     setEmail(user.email)
   }, [userState])
 

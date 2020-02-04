@@ -8,7 +8,7 @@ import CreateArticle from './pages/article/create'
 import EditArticle from './pages/article/edit'
 import Auth from './pages/auth'
 import Settings from './pages/settings'
-import Profile from "./pages/profile";
+import Profile from './pages/profile'
 
 export default () => {
   return (
