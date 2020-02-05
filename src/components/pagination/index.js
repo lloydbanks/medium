@@ -6,6 +6,8 @@ const Pagination = ({ total, limit = LIMIT, url, current }) => {
   const pagesCount = Math.ceil(total / limit)
   const pages = range(1, pagesCount)
 
+  if (pagesCount < 2) return null
+
   return (
     <div>
       <ul className="pagination">
