@@ -4,6 +4,7 @@ import { Loading, Error } from '../../components/status'
 import { Link, Redirect } from 'react-router-dom'
 import TagList from '../../components/tags/list'
 import { UserContext } from '../../contexts/user'
+import { dateFormat } from '../../helpers'
 
 const Article = ({ match }) => {
   const { slug } = match.params
@@ -49,7 +50,9 @@ const Article = ({ match }) => {
                 <Link to={`/profile/${data.article.author.username}`}>
                   {data.article.author.username}
                 </Link>
-                <span className="date">{data.article.createdAt}</span>
+                <span className="date">
+                  {dateFormat(data.article.createdAt)}
+                </span>
               </div>
               {isAuthor() && (
                 <span>

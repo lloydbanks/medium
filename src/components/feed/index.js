@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import TagList from '../tags/list'
 import AddToFavorites from './add'
+import { dateFormat } from '../../helpers'
 
 const Feed = ({ articles }) => {
   return (
@@ -19,7 +20,7 @@ const Feed = ({ articles }) => {
                 <Link to={`/profile/${author.username}`} className="author">
                   {author.username}
                 </Link>
-                <span className="date">{article.createdAt}</span>
+                <span className="date">{dateFormat(article.createdAt)}</span>
               </div>
               <div className="pull-xs-right">
                 <AddToFavorites

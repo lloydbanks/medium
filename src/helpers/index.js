@@ -13,3 +13,11 @@ export const getPaginator = (search, limit = LIMIT) => {
 
   return { current, offset }
 }
+
+export const dateFormat = date => {
+  const newDate = new Date(date)
+  const locale = 'us-US'
+  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+
+  return newDate.toLocaleDateString(locale, options)
+}
