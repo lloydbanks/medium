@@ -47,7 +47,10 @@ const Article = ({ match }) => {
                 <img src={data.article.author.image} alt="" />
               </Link>
               <div className="info">
-                <Link to={`/profile/${data.article.author.username}`}>
+                <Link
+                  to={`/profile/${data.article.author.username}`}
+                  className="author"
+                >
                   {data.article.author.username}
                 </Link>
                 <span className="date">

@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import useFetch from '../../hooks/useFetch'
 import { Loading } from '../../components/status'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import UserArticles from './components/articles'
 
 const Profile = ({ location, match }) => {
@@ -26,6 +26,12 @@ const Profile = ({ location, match }) => {
               <img src={profile.image} alt="" className="user-img" />
               <h4>{profile.username}</h4>
               <p>{profile.bio}</p>
+              <Link
+                to="/settings"
+                className="btn btn-sm btn-outline-secondary action-btn"
+              >
+                <i className="ion-gear-a"></i> Edit Profile Settings
+              </Link>
             </div>
           </div>
         </div>
@@ -49,7 +55,7 @@ const Profile = ({ location, match }) => {
                     to={`/profile/${profile.username}/favorites`}
                     className="nav-link"
                   >
-                    Favorites Posts
+                    Favorited Posts
                   </NavLink>
                 </li>
               </ul>

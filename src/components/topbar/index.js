@@ -37,7 +37,7 @@ const Topbar = () => {
               <li className="nav-item">
                 <NavLink to="/articles/create" className="nav-link">
                   <i className="ion-compose"></i>
-                  &nbsp; New post
+                  &nbsp; New Article
                 </NavLink>
               </li>
               <li className="nav-item">
